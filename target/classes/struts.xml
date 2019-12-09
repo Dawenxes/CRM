@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.objectFactory" value="spring"></constant>
+    <package name="test1" extends="struts-default" namespace="/">
+        <action name="customer_*" class="customerAction" method="{1}">
+            <result name="tolist">/jsp/customer/list.jsp</result>
+            <result name="addUI">/jsp/customer/add.jsp</result>
+            <result name="toaction" type="redirectAction">customer_list</result>
+            <result name="editUI">/jsp/customer/edit.jsp</result>
+        </action>
+        <action name="user_*" class="com.edith.action.UserAction" method="{1}">
+            <result name="login">/login.jsp</result>
+            <result name="index">/index.htm</result>
+        </action>
+        <action name="linkman_*" class="linkmanAction" method="{1}">
+            <result name="addUI">/jsp/linkman/add.jsp</result>
+            <result name="tolist">/jsp/linkman/list.jsp</result>
+        </action>
+    </package>
+</struts>

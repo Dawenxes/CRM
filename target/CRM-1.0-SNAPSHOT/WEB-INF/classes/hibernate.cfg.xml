@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!-- 告诉hibernate要连接的数据库信息 -->
+<hibernate-configuration>
+		 <session-factory> <!-- 生产session的工厂   session是connection -->
+		 		<!-- 数据的驱动 -->
+		 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		 		<!-- 数据库的地址 
+		 			jdbc:mysql:///test ==jdbc:mysql://localhost:3306/test
+		 		-->
+		 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/crm</property>
+		 		<!-- 数据库的用户名  -->
+		 		<property name="hibernate.connection.username">root</property>
+		 		<!-- 数据库的密码 -->
+		 		<property name="hibernate.connection.password">123456</property>
+		 		<!-- 数据库的方言
+		 			 分页: 
+		 			   mysql:     select * from 表  limit ?,?
+		 			   sqlserver: select * from 表  top ?,?
+		 			   让hibernate生成符合我mysql数据库的sql语句 
+		 		 -->
+		 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		 	
+		 		<!-- 告诉hibernate要用c3p0 -->
+		 		<property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+		 		<!-- hibernate自动生成的sql语句在控制台显示出来 -->
+		 		<property name="hibernate.show_sql">true</property>
+		 		<!-- 显示的sql语句更加的格式化 -->
+		 		<property name="hibernate.format_sql">true</property>
+
+		 		
+		 		<!-- 让hibernate根据映射关系自动生成数据库的表 默认hibernate不会主动创建表 
+		 			 create:没有表创建表 有表删除掉创建表
+		 			 create-drop:没有表创建表 有表删除掉创建表 用完就全删
+		 			 					 做测试
+		 			
+		 			 update: 企业开发使用  没有表 创建表  有表 使用表
+		 			 validate:默认 不创建
+		 		-->
+		 		<property name="hibernate.hbm2ddl.auto">update</property>
+		 		
+		 		<!-- 加载映射文件(Customer.hbm.xml)的地址 -->
+			 	<property name="hibernate.current_session_context_class">thread</property>
+			 <mapping class="com.edith.bean.Customer"></mapping>
+			 <mapping class="com.edith.bean.Linkman"></mapping>
+			 <mapping class="com.edith.bean.User"></mapping>
+			 <mapping class="com.edith.bean.Role"></mapping>
+		 </session-factory>
+
+
+</hibernate-configuration>
