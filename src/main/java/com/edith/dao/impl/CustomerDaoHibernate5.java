@@ -24,6 +24,4 @@ public class CustomerDaoHibernate5 extends BaseDaoHibernate5<Customer> implement
     public List<Customer> findByDetachedCriteria(DetachedCriteria detachedCriteria) {
         return findByCriteria(detachedCriteria);
     }
-
-
 }

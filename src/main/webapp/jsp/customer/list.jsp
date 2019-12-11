@@ -28,7 +28,7 @@
 	})
 	function del(id) {
 		if (confirm("确定删除此用户")) {
-			location.href="${pageContext.request.contextPath}/customer_delete?cust_id="+id;
+			location.href="${pageContext.request.contextPath}/customer_delete.action?cust_id="+id;
 		}
 	}
 
@@ -152,7 +152,7 @@
 													<TD><s:property value="#customer.cust_phone"/></TD>
 													<TD><s:property value="#customer.cust_mobile"/></TD>
 													<TD>
-													<a href="${pageContext.request.contextPath }/customer_editUI?cust_id=<s:property value="#customer.cust_id"/>">修改</a>
+													<a href="${pageContext.request.contextPath }/customer_editUI.action?cust_id=<s:property value="#customer.cust_id"/>">修改</a>
 													&nbsp;&nbsp;
 													<a href="#" onclick="del('<s:property value="#customer.cust_id"/>')">删除</a>
 													</TD>

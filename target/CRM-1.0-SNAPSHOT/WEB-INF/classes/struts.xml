@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE struts PUBLIC
-        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-        "http://struts.apache.org/dtds/struts-2.3.dtd">
-
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
+    <include file="struts-default.xml"></include>
+    <!-- 指定默认编码集 -->
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <!-- 指定需要Struts2处理的请求后缀 -->
+    <constant name="struts.action.extension" value="do,action"></constant>
+    <!-- 设置浏览器是否缓存静态内容，开发阶段应关闭，生产阶段打开，默认为打开 -->
+    <constant name="struts.serve.static.browserCache" value="false"></constant>
+    <!-- 当struts的配置文件修改后，系统是否自动重新加载该文件，默认为false，开发阶段应打开 -->
+    <constant name="struts.configuration.xml.reload" value="true"></constant>
+    <!-- 开发模式下使用，可以打印出更详细的错误信息 -->
+    <constant name="struts.devMode" value="true"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.objectFactory" value="spring"></constant>
-    <package name="test1" extends="struts-default" namespace="/">
+    <package name="test1" extends="struts-default" namespace="/" strict-method-invocation="false">
         <action name="customer_*" class="customerAction" method="{1}">
             <result name="tolist">/jsp/customer/list.jsp</result>
             <result name="addUI">/jsp/customer/add.jsp</result>
-            <result name="toaction" type="redirectAction">customer_list</result>
+            <result name="toaction" type="redirectAction">customer_list.action</result>
             <result name="editUI">/jsp/customer/edit.jsp</result>
-        </action>
-        <action name="user_*" class="com.edith.action.UserAction" method="{1}">
-            <result name="login">/login.jsp</result>
-            <result name="index">/index.htm</result>
         </action>
         <action name="linkman_*" class="linkmanAction" method="{1}">
             <result name="addUI">/jsp/linkman/add.jsp</result>
-            <result name="tolist">/jsp/linkman/list.jsp</result>
+            <result name="tolist" type="redirectAction">linkman_list.action</result>
+            <result name="success">/jsp/linkman/list.jsp</result>
+            <result name="editUI">/jsp/linkman/edit.jsp</result>
         </action>
     </package>
 </struts>

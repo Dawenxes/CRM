@@ -19,7 +19,7 @@
 <BODY>
 <s:debug></s:debug>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/linkman_add"
+		action="${pageContext.request.contextPath }/linkman_add.action"
 		method=post>
 		
 

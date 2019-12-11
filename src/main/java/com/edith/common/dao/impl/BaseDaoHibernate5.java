@@ -1,8 +1,10 @@
 package com.edith.common.dao.impl;
 
 import com.edith.common.dao.BaseDao;
+import com.edith.common.dao.Page;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -158,7 +160,19 @@ public class BaseDaoHibernate5<T> implements BaseDao<T>
 	}
 
 	@SuppressWarnings("unchecked")
-	protected List<T> findByCriteria(DetachedCriteria detachedCriteria) {
+	public List<T> findByCriteria(DetachedCriteria detachedCriteria) {
 		return (List<T>)hibernateTemplate.findByCriteria(detachedCriteria);
 	}
+
+	public Page<T> findByCriteriaWithPage(DetachedCriteria detachedCriteria,int pageNumber,int pageSize) {
+		detachedCriteria.setProjection(Projections.rowCount());
+		List<Long> total = ((List<Long>)hibernateTemplate.findByCriteria(detachedCriteria));
+		detachedCriteria.setProjection(null);
+		List<T> rows=(List<T>)hibernateTemplate.findByCriteria(detachedCriteria, (pageNumber - 1) * pageSize, pageSize);
+
+
+		Page<T> page = new Page<>((pageNumber - 1) * pageSize,total.get(0),pageSize,rows);
+		return page;
+	}
+
 }
